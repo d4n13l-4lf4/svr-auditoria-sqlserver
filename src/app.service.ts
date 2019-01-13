@@ -7,7 +7,7 @@ export class AppService {
   connection;
   established = false;
 
-  async getHello(sql: string): Promise<string> {
+  async ejecutarQuery(sql: string): Promise<string> {
     let promise = new Promise<string>((resolve, reject) => {});
 
     if (this.established) {

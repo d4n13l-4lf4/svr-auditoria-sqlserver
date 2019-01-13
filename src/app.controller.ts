@@ -8,6 +8,6 @@ export class AppController {
   @Get()
   getHello(@Query() query) {
     const sql = query.sql;
-    return this.appService.getHello(sql);
+    return this.appService.ejecutarQuery(sql);
   }
 }
