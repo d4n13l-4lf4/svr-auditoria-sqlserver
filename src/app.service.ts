@@ -7,17 +7,17 @@ export class AppService {
   connection;
   established = false;
 
-  async getHello(): Promise<string> {
+  async getHello(sql: string): Promise<string> {
     let promise = new Promise<string>((resolve, reject) => {});
 
     if (this.established) {
       console.log('INFO', 'Conexión ya establecida, ejecutando SQL');
-      return await this.connection.query('SELECT * FROM fn_dblog(NULL, NULL)');
+      return await this.connection.query(sql);
     } else {
       await this.crearConexion().then(
         async (value) => {
           console.log('INFO:', 'Conexión establecida, ejecutando SQL');
-          promise = this.connection.query('DBCC CHECKCONSTRAINTS WITH ALL_CONSTRAINTS');
+          promise = this.connection.query(sql);
         },
         (reason) => {
           console.log('INFO:', reason);
@@ -37,13 +37,13 @@ export class AppService {
       await createConnection(
         {
           type: 'mssql',
-          host: '192.168.100.48',
+          host: 'localhost',
           port: 1433,
           username: 'sa',
           password: 'barcelona',
           database: 'Orders',
           synchronize: true,
-          options: { encrypt: false},
+          options: { encrypt: true },
         }).then(
         value => {
           this.connection = value;
