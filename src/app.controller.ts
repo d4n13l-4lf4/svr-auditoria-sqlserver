@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(@Query() query) {
+  getQuery(@Query() query) {
     const sql = query.sql;
     return this.appService.ejecutarQuery(sql);
   }
