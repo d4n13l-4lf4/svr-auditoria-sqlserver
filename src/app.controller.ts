@@ -8,6 +8,7 @@ export class AppController {
   @Get()
   getQuery(@Query() query) {
     const sql = query.sql;
+    console.log('QUERY_EJECUTADO: ', sql);
     return this.appService.ejecutarQuery(sql);
   }
 }
